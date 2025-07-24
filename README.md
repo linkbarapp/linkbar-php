@@ -4,7 +4,7 @@
 [![Coverage Status](https://codecov.io/gh/linkbarapp/linkbar-php/branch/main/graph/badge.svg)](https://codecov.io/gh/linkbarapp/linkbar-php)
 [![Packagist Version](https://img.shields.io/packagist/v/linkbar/sdk)](https://packagist.org/packages/linkbar/sdk)
 [![PHP Version](https://img.shields.io/packagist/php-v/linkbar/sdk)](https://packagist.org/packages/linkbar/sdk)
-[![License](https://img.shields.io/packagist/l/linkbar/sdk)](https://github.com/linkbarapp/linkbar-php/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/linkbarapp/linkbar-php)](LICENSE)
 
 A modern PHP SDK for the Linkbar API that allows you to create, manage, and track short links. Built with PHP 8.1+ features including named parameters, readonly properties, and match expressions.
 
