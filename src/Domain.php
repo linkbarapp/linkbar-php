@@ -18,7 +18,8 @@ class Domain
         public readonly ?string $homepageRedirectUrl,
         public readonly ?string $nonexistentLinkRedirectUrl,
         private readonly array $rawData = []
-    ) {}
+    ) {
+    }
 
     public function getId(): ?string
     {
@@ -103,7 +104,7 @@ class Domain
 
         // Handle both paginated and non-paginated responses
         $domainsData = $responseData['results'] ?? $responseData;
-        if (!is_array($domainsData)) {
+        if (! is_array($domainsData)) {
             $domainsData = [$domainsData];
         }
 

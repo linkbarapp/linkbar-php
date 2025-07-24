@@ -90,7 +90,6 @@ class Linkbar
         try {
             $response = $client->request($method, $url, $options);
             $body = $response->getBody()->getContents();
-            
             return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
         } catch (RequestException $e) {
             $statusCode = $e->getResponse()?->getStatusCode() ?? 0;

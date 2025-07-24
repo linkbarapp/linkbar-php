@@ -59,7 +59,7 @@ class DomainTest extends TestCase
         $mockHandler = new MockHandler([
             new Response(201, [], json_encode($this->sampleDomainData) ?: '')
         ]);
-        
+
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
         Linkbar::setHttpClient($client);
 
@@ -89,7 +89,7 @@ class DomainTest extends TestCase
         $mockHandler = new MockHandler([
             new Response(201, [], json_encode($minimalData) ?: '')
         ]);
-        
+
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
         Linkbar::setHttpClient($client);
 
@@ -109,7 +109,7 @@ class DomainTest extends TestCase
             'results' => [
                 $this->sampleDomainData,
                 array_merge($this->sampleDomainData, [
-                    'id' => 'domain456', 
+                    'id' => 'domain456',
                     'name' => 'another.com',
                     'is_custom' => false
                 ])
@@ -119,7 +119,7 @@ class DomainTest extends TestCase
         $mockHandler = new MockHandler([
             new Response(200, [], json_encode($responseData) ?: '')
         ]);
-        
+
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
         Linkbar::setHttpClient($client);
 
@@ -138,7 +138,7 @@ class DomainTest extends TestCase
         $mockHandler = new MockHandler([
             new Response(200, [], json_encode([$this->sampleDomainData]) ?: '')
         ]);
-        
+
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
         Linkbar::setHttpClient($client);
 
@@ -154,7 +154,7 @@ class DomainTest extends TestCase
         $mockHandler = new MockHandler([
             new Response(200, [], json_encode($this->sampleDomainData) ?: '')
         ]);
-        
+
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
         Linkbar::setHttpClient($client);
 
@@ -175,7 +175,7 @@ class DomainTest extends TestCase
         $mockHandler = new MockHandler([
             new Response(200, [], json_encode($updatedData) ?: '')
         ]);
-        
+
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
         Linkbar::setHttpClient($client);
 
@@ -221,7 +221,7 @@ class DomainTest extends TestCase
         $mockHandler = new MockHandler([
             new Response(204, [])
         ]);
-        
+
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
         Linkbar::setHttpClient($client);
 
@@ -264,7 +264,7 @@ class DomainTest extends TestCase
         $mockHandler = new MockHandler([
             new Response(200, [], json_encode($refreshedData) ?: '')
         ]);
-        
+
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
         Linkbar::setHttpClient($client);
 

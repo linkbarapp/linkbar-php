@@ -31,7 +31,7 @@ class LinkbarTest extends TestCase
     {
         $apiKey = 'test-api-key';
         Linkbar::setApiKey($apiKey);
-        
+
         $this->assertSame($apiKey, Linkbar::getApiKey());
     }
 
@@ -39,7 +39,7 @@ class LinkbarTest extends TestCase
     {
         $baseUrl = 'https://custom.api.com/';
         Linkbar::setBaseUrl($baseUrl);
-        
+
         $this->assertSame($baseUrl, Linkbar::getBaseUrl());
     }
 
@@ -47,7 +47,7 @@ class LinkbarTest extends TestCase
     {
         $client = new Client(['timeout' => 60]);
         Linkbar::setHttpClient($client);
-        
+
         $this->assertSame($client, Linkbar::getHttpClient());
     }
 
@@ -55,7 +55,7 @@ class LinkbarTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('API key not set. Use Linkbar::setApiKey() to configure.');
-        
+
         Linkbar::request('GET', 'test');
     }
 
@@ -64,13 +64,13 @@ class LinkbarTest extends TestCase
         $mockHandler = new MockHandler([
             new Response(200, [], json_encode(['success' => true]) ?: '')
         ]);
-        
+
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
         Linkbar::setHttpClient($client);
         Linkbar::setApiKey('test-key');
-        
+
         $result = Linkbar::request('GET', 'test', ['param' => 'value']);
-        
+
         $this->assertSame(['success' => true], $result);
     }
 
@@ -79,13 +79,13 @@ class LinkbarTest extends TestCase
         $mockHandler = new MockHandler([
             new Response(201, [], json_encode(['created' => true]) ?: '')
         ]);
-        
+
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
         Linkbar::setHttpClient($client);
         Linkbar::setApiKey('test-key');
-        
+
         $result = Linkbar::request('POST', 'test', ['data' => 'value']);
-        
+
         $this->assertSame(['created' => true], $result);
     }
 
@@ -99,14 +99,14 @@ class LinkbarTest extends TestCase
                 new Response(401, [], $responseBody)
             )
         ]);
-        
+
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
         Linkbar::setHttpClient($client);
         Linkbar::setApiKey('invalid-key');
-        
+
         $this->expectException(UnauthorizedException::class);
         $this->expectExceptionMessage('Invalid API key');
-        
+
         Linkbar::request('GET', 'test');
     }
 
@@ -120,14 +120,14 @@ class LinkbarTest extends TestCase
                 new Response(400, [], $responseBody)
             )
         ]);
-        
+
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
         Linkbar::setHttpClient($client);
         Linkbar::setApiKey('test-key');
-        
+
         $this->expectException(BadRequestException::class);
         $this->expectExceptionMessage('Invalid data');
-        
+
         Linkbar::request('POST', 'test');
     }
 
@@ -141,14 +141,14 @@ class LinkbarTest extends TestCase
                 new Response(404, [], $responseBody)
             )
         ]);
-        
+
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
         Linkbar::setHttpClient($client);
         Linkbar::setApiKey('test-key');
-        
+
         $this->expectException(NotFoundException::class);
         $this->expectExceptionMessage('Resource not found');
-        
+
         Linkbar::request('GET', 'test');
     }
 
@@ -162,14 +162,14 @@ class LinkbarTest extends TestCase
                 new Response(500, [], $responseBody)
             )
         ]);
-        
+
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
         Linkbar::setHttpClient($client);
         Linkbar::setApiKey('test-key');
-        
+
         $this->expectException(HttpException::class);
         $this->expectExceptionMessage('Server error');
-        
+
         try {
             Linkbar::request('GET', 'test');
         } catch (HttpException $e) {
@@ -183,7 +183,7 @@ class LinkbarTest extends TestCase
     {
         Linkbar::setBaseUrl('https://api.example.com');
         $this->assertSame('https://api.example.com/', Linkbar::getBaseUrl());
-        
+
         Linkbar::setBaseUrl('https://api.example.com/');
         $this->assertSame('https://api.example.com/', Linkbar::getBaseUrl());
     }

@@ -20,7 +20,8 @@ class Link
         public readonly int $clickCount,
         public readonly ?DateTimeInterface $createdAt,
         private readonly array $rawData = []
-    ) {}
+    ) {
+    }
 
     public function getShortUrl(): ?string
     {
@@ -143,7 +144,7 @@ class Link
 
         // Handle both paginated and non-paginated responses
         $linksData = $responseData['results'] ?? $responseData;
-        if (!is_array($linksData)) {
+        if (! is_array($linksData)) {
             $linksData = [$linksData];
         }
 
