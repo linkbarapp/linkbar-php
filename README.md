@@ -40,7 +40,7 @@ echo "Redirects to: " . $link->getLongUrl() . "\n";
 
 ## Authentication
 
-Get your API key from your [Linkbar dashboard](https://linkbar.co/api-settings/) and configure it:
+Get your API key from your [Linkbar dashboard](https://app.linkbar.co/api-settings) and configure it:
 
 ```php
 use Linkbar\Linkbar;
