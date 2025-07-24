@@ -18,7 +18,7 @@ class Linkbar
     private static string $baseUrl = 'https://api.linkbar.co/';
     private static ?Client $httpClient = null;
 
-    public static function setApiKey(string $apiKey): void
+    public static function setApiKey(?string $apiKey): void
     {
         self::$apiKey = $apiKey;
     }
@@ -63,7 +63,7 @@ class Linkbar
         string $method,
         string $endpoint,
         ?array $data = null
-    ): array {
+    ): ?array {
         if (self::$apiKey === null) {
             throw new InvalidArgumentException('API key not set. Use Linkbar::setApiKey() to configure.');
         }
@@ -90,6 +90,12 @@ class Linkbar
         try {
             $response = $client->request($method, $url, $options);
             $body = $response->getBody()->getContents();
+            
+            // Handle empty responses (e.g., from DELETE requests)
+            if (empty($body)) {
+                return null;
+            }
+            
             return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
         } catch (RequestException $e) {
             $statusCode = $e->getResponse()?->getStatusCode() ?? 0;

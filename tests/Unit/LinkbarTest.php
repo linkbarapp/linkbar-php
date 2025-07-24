@@ -22,7 +22,8 @@ class LinkbarTest extends TestCase
 {
     protected function setUp(): void
     {
-        // Reset to clean state without setting API key for unit tests
+        // Reset to clean state for unit tests
+        Linkbar::setApiKey(null);
         Linkbar::setBaseUrl('https://api.linkbar.co/');
         Linkbar::setHttpClient(new Client());
     }
