@@ -62,7 +62,7 @@ class LinkbarTest extends TestCase
     public function testSuccessfulGetRequest(): void
     {
         $mockHandler = new MockHandler([
-            new Response(200, [], json_encode(['success' => true]))
+            new Response(200, [], json_encode(['success' => true]) ?: '')
         ]);
         
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
@@ -77,7 +77,7 @@ class LinkbarTest extends TestCase
     public function testSuccessfulPostRequest(): void
     {
         $mockHandler = new MockHandler([
-            new Response(201, [], json_encode(['created' => true]))
+            new Response(201, [], json_encode(['created' => true]) ?: '')
         ]);
         
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
@@ -91,7 +91,7 @@ class LinkbarTest extends TestCase
 
     public function testUnauthorizedExceptionThrown(): void
     {
-        $responseBody = json_encode(['message' => 'Invalid API key']);
+        $responseBody = json_encode(['message' => 'Invalid API key']) ?: '';
         $mockHandler = new MockHandler([
             new RequestException(
                 'Unauthorized',
@@ -112,7 +112,7 @@ class LinkbarTest extends TestCase
 
     public function testBadRequestExceptionThrown(): void
     {
-        $responseBody = json_encode(['message' => 'Invalid data']);
+        $responseBody = json_encode(['message' => 'Invalid data']) ?: '';
         $mockHandler = new MockHandler([
             new RequestException(
                 'Bad Request',
@@ -133,7 +133,7 @@ class LinkbarTest extends TestCase
 
     public function testNotFoundExceptionThrown(): void
     {
-        $responseBody = json_encode(['message' => 'Resource not found']);
+        $responseBody = json_encode(['message' => 'Resource not found']) ?: '';
         $mockHandler = new MockHandler([
             new RequestException(
                 'Not Found',
@@ -154,7 +154,7 @@ class LinkbarTest extends TestCase
 
     public function testGenericHttpExceptionThrown(): void
     {
-        $responseBody = json_encode(['message' => 'Server error']);
+        $responseBody = json_encode(['message' => 'Server error']) ?: '';
         $mockHandler = new MockHandler([
             new RequestException(
                 'Internal Server Error',

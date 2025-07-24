@@ -64,7 +64,9 @@ class LinkbarIntegrationTest extends TestCase
         $this->assertSame($newUrl, $refreshedLink->getLongUrl());
         
         // Get the specific link
-        $fetchedLink = Link::get($link->getId());
+        $linkId = $link->getId();
+        $this->assertNotNull($linkId, 'Link ID should not be null');
+        $fetchedLink = Link::get($linkId);
         $this->assertSame($link->getId(), $fetchedLink->getId());
         $this->assertSame($newUrl, $fetchedLink->getLongUrl());
         
@@ -72,8 +74,10 @@ class LinkbarIntegrationTest extends TestCase
         $link->delete();
         
         // Verify it was deleted by trying to fetch it
+        $linkId = $link->getId();
+        $this->assertNotNull($linkId, 'Link ID should not be null before attempting to fetch');
         $this->expectException(\Linkbar\Exception\NotFoundException::class);
-        Link::get($link->getId());
+        Link::get($linkId);
     }
 
     public function testLinkListing(): void
@@ -154,7 +158,7 @@ class LinkbarIntegrationTest extends TestCase
         );
         
         $this->assertSame($domain->getName(), $link->getDomainName());
-        $this->assertStringContains($domain->getName(), $link->getShortUrl());
+        $this->assertStringContainsString($domain->getName(), $link->getShortUrl());
         
         // Clean up
         $link->delete();
@@ -167,7 +171,7 @@ class LinkbarIntegrationTest extends TestCase
             Link::create('not-a-valid-url');
             $this->fail('Should throw exception for invalid URL');
         } catch (\Linkbar\Exception\BadRequestException $e) {
-            $this->assertStringContains('url', strtolower($e->getMessage()));
+            $this->assertStringContainsString('url', strtolower($e->getMessage()));
         }
         
         // Test getting non-existent link

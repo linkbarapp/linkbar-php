@@ -121,7 +121,7 @@ class LinkTest extends TestCase
     public function testCreateLink(): void
     {
         $mockHandler = new MockHandler([
-            new Response(201, [], json_encode($this->sampleLinkData))
+            new Response(201, [], json_encode($this->sampleLinkData) ?: '')
         ]);
         
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
@@ -147,7 +147,7 @@ class LinkTest extends TestCase
         ];
 
         $mockHandler = new MockHandler([
-            new Response(200, [], json_encode($responseData))
+            new Response(200, [], json_encode($responseData) ?: '')
         ]);
         
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
@@ -164,7 +164,7 @@ class LinkTest extends TestCase
     public function testGetListWithoutPagination(): void
     {
         $mockHandler = new MockHandler([
-            new Response(200, [], json_encode([$this->sampleLinkData]))
+            new Response(200, [], json_encode([$this->sampleLinkData]) ?: '')
         ]);
         
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
@@ -180,7 +180,7 @@ class LinkTest extends TestCase
     public function testGet(): void
     {
         $mockHandler = new MockHandler([
-            new Response(200, [], json_encode($this->sampleLinkData))
+            new Response(200, [], json_encode($this->sampleLinkData) ?: '')
         ]);
         
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
@@ -200,7 +200,7 @@ class LinkTest extends TestCase
         ]);
 
         $mockHandler = new MockHandler([
-            new Response(200, [], json_encode($updatedData))
+            new Response(200, [], json_encode($updatedData) ?: '')
         ]);
         
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
@@ -289,7 +289,7 @@ class LinkTest extends TestCase
         $refreshedData = array_merge($this->sampleLinkData, ['click_count' => 100]);
 
         $mockHandler = new MockHandler([
-            new Response(200, [], json_encode($refreshedData))
+            new Response(200, [], json_encode($refreshedData) ?: '')
         ]);
         
         $client = new Client(['handler' => HandlerStack::create($mockHandler)]);
