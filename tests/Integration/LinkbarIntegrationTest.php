@@ -158,7 +158,7 @@ class LinkbarIntegrationTest extends TestCase
         );
         
         $this->assertSame($domain->getName(), $link->getDomainName());
-        $this->assertStringContainsString($domain->getName(), $link->getShortUrl());
+        $this->assertStringContainsString($domain->getName(), $link->getShortUrl() ?? '');
         
         // Clean up
         $link->delete();
