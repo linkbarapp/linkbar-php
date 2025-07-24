@@ -125,6 +125,10 @@ class Link
 
         $responseData = Linkbar::request('POST', 'links/', $data);
 
+        if ($responseData === null) {
+            throw new InvalidArgumentException('API returned null response for link creation.');
+        }
+
         return self::fromApiData($responseData);
     }
 
@@ -159,6 +163,10 @@ class Link
     {
         $responseData = Linkbar::request('GET', "links/{$linkId}/");
 
+        if ($responseData === null) {
+            throw new InvalidArgumentException('API returned null response for link retrieval.');
+        }
+
         return self::fromApiData($responseData);
     }
 
@@ -192,6 +200,10 @@ class Link
 
         $responseData = Linkbar::request('PATCH', "links/{$this->id}/", $data);
 
+        if ($responseData === null) {
+            throw new InvalidArgumentException('API returned null response for link update.');
+        }
+
         return self::fromApiData($responseData);
     }
 
@@ -219,6 +231,10 @@ class Link
         }
 
         $responseData = Linkbar::request('GET', "links/{$this->id}/");
+
+        if ($responseData === null) {
+            throw new InvalidArgumentException('API returned null response for link refresh.');
+        }
 
         return self::fromApiData($responseData);
     }

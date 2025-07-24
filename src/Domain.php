@@ -82,6 +82,10 @@ class Domain
 
         $responseData = Linkbar::request('POST', 'domains/', $data);
 
+        if ($responseData === null) {
+            throw new InvalidArgumentException('API returned null response for domain creation.');
+        }
+
         return self::fromApiData($responseData);
     }
 
@@ -119,6 +123,10 @@ class Domain
     {
         $responseData = Linkbar::request('GET', "domains/{$domainId}/");
 
+        if ($responseData === null) {
+            throw new InvalidArgumentException('API returned null response for domain retrieval.');
+        }
+
         return self::fromApiData($responseData);
     }
 
@@ -148,6 +156,10 @@ class Domain
 
         $responseData = Linkbar::request('PATCH', "domains/{$this->id}/", $data);
 
+        if ($responseData === null) {
+            throw new InvalidArgumentException('API returned null response for domain update.');
+        }
+
         return self::fromApiData($responseData);
     }
 
@@ -175,6 +187,10 @@ class Domain
         }
 
         $responseData = Linkbar::request('GET', "domains/{$this->id}/");
+
+        if ($responseData === null) {
+            throw new InvalidArgumentException('API returned null response for domain refresh.');
+        }
 
         return self::fromApiData($responseData);
     }
